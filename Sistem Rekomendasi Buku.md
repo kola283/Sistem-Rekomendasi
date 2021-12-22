@@ -39,13 +39,16 @@ Variabel-variabel pada 7k Books dataset adalah sebagai berikut.
 12. ratings_count   : Banyak rating yang diberikan pada buku dari situs GoodReads
 
 Melakukan buku.info() untuk mengetahui jenis tipe data apa saja yang ada pada dataset. Dan hasilnya dataset memiliki 4 kolom berjenis float64, 1 kolom berjenis int64 dan 7 kolom berjenis object.
+
 ![image](https://github.com/kola283/gambar/blob/main/bahan/infobuku.JPG?raw=True)
 
 ## Data Preparation
 Pada bagian ini tahap-tahap yang saya lakukan adalah sebagai berikut:
 1. Drop kolom yang tidak digunakan. Hal ini dilakukan agar sistem hanya fokus pada fitur yang penting untuk digunakan pada pemodelan dan juga beberapa kolom memiliki missing value hampir sampai setengah dari data. Kolom yang saya gunakan hanya 3 yaitu kolom title, authors dan categories.
 2. Dataset yang disiapkan akan dicek Missing Value nya. Dapat dilihat pada gambar di bawah bahwa terdapat beberapa missing value pada bagian authors dan categories.
+
 ![image](https://github.com/kola283/gambar/blob/main/bahan/missingvalue.JPG?raw=true)
+
 Di bersihkan dengan fungsi dropna() karena missing value bisa berakibat fatal jika dibiarkan di dalam dataset.
 3. Menghapus data duplikat menggunakan fungsi drop_duplicates(). Hal ini saya lakukan karena ada beberapa buku yang memiliki judul yang sama.
 4. Selanjutnya,  dilakukan konversi data series menjadi list. Dalam hal ini, menggunakan fungsi tolist() dari library numpy. Hal ini dilakukan agar pengolahan data menjadi lebih mudah dan tidak terjadi error.
@@ -56,20 +59,27 @@ Di bersihkan dengan fungsi dropna() karena missing value bisa berakibat fatal ji
 Pada tahap ini adalah tahap pembuatan sistem rekomendasi sederhana berdasarkan kategori buku. Dengan menggunakan fitur CountVectorizer. fitur ini akan menemukan informasi sebanyak mungkin untuk menghitung derajat kemiripan. Sistem rekomendasi yang digunakan adalah content-based filtering. Model akan menyamakan tiap-tiap kategori buku yang sama untuk dijadikan rekomendasi buku. Saya hanya menggunakan fitur categories untuk perhitungan degree similarity dikarenakan referensi orang untuk membaca suatu buku adalah dengan berdasarkan kategori/genre yang diminati.
 
 Teknik yang digunakan pada sistem rekomendasi ini adalah dengan menghitung derajat kesamaan (similarity degree) antar judul buku dengan teknik cosine similarity.
+
 ![image](https://github.com/kola283/gambar/blob/main/bahan/cvec.JPG?raw=True)
+
 Pada tahapan ini, kita menghitung cosine similarity dataframe cvec_matrix yang kita peroleh pada tahapan sebelumnya. Dengan satu baris kode untuk memanggil fungsi cosine similarity dari library sklearn, kita telah berhasil menghitung kesamaan (similarity) antar judul buku. Kode di atas menghasilkan keluaran berupa matriks kesamaan dalam bentuk array. 
 
 Selanjutnya adalah matriks kesamaan setiap judul buku dengan menampilkan judul buku dalam 5 sampel kolom (axis = 1) dan 10 sampel baris (axis=0).
+
 ![image](https://github.com/kola283/gambar/blob/main/bahan/metrik2.JPG?raw=True)
+
 Dapat dilihat hasilnya, pada nilai 1.0 itu menandakan bahwa judul buku tersebut memiliki kesamaan. Sedangkan pada nilai 0.0 itu menandakan bahwa judul buku tersebut tidak memiliki kesamaan. Begitulah cara metrik ini bekerja pada model.
 
 
 ## Evaluation
 Metrik yang akan kita gunakan pada prediksi ini adalah Precision. Precision didefinisikan dalam persamaan berikut
+
 ![image](https://github.com/kola283/gambar/blob/main/bahan/precision.png?raw=True)
 
 Ini adalah contoh rekomendasi buku dari pencarian buku 'Murder in mesopotamia'.
+
 ![gambar](https://github.com/kola283/gambar/blob/main/bahan/rekomendasi.JPG?raw=True)
+
 Buku 'Murder in Mesopotamia' memiliki kategori Detective and mystery stories. Lalu sistem rekomendasi juga akan merekomendasikan 5 judul buku yang memiliki kategori yang sama yaitu Detective and Mystery Stories.
 
 Jadi perhitungan metriknya adalah sebagai berikut:
