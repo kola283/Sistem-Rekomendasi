@@ -73,8 +73,9 @@ Ini adalah contoh rekomendasi buku dari pencarian buku 'Murder in mesopotamia'.
 Buku 'Murder in Mesopotamia' memiliki kategori Detective and mystery stories. Lalu sistem rekomendasi juga akan merekomendasikan 5 judul buku yang memiliki kategori yang sama yaitu Detective and Mystery Stories.
 
 Jadi perhitungan metriknya adalah sebagai berikut:
-Precision = #of recommendation that are relevant/#of item we recommend.
-Pada contoh rekomendasi buku di atas:
-Precission = 5/5.
+- Precision = #of recommendation that are relevant/#of item we recommend.
+- Pada contoh rekomendasi buku di atas:
+- Precission = 5/5.
+
 Jadi presisinya = 100%
 
